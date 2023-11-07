@@ -258,7 +258,7 @@ def transcribe_stable(
         verbose=verbose
     )
     sample_padding = int(N_FFT // 2) + 1
-    whole_mel = log_mel_spectrogram(audio, padding=sample_padding) if mel_first else None
+    whole_mel = log_mel_spectrogram(audio, n_mels=128, padding=sample_padding) if mel_first else None
     tokenizer = None
     language = None
     initial_prompt_tokens = []
@@ -292,6 +292,7 @@ def transcribe_stable(
                         if whole_mel is None:
                             curr_mel_segment = log_mel_spectrogram(
                                 audio[..., start_sample:start_sample+N_SAMPLES],
+                                n_mels=128,
                                 padding=sample_padding
                             )
                         else:
@@ -433,7 +434,7 @@ def transcribe_stable(
             segment_duration = segment_samples / SAMPLE_RATE
 
             mel_segment = (
-                log_mel_spectrogram(audio_segment, padding=sample_padding)
+                log_mel_spectrogram(audio_segment, n_mels=128, padding=sample_padding)
                 if whole_mel is None else
                 whole_mel[..., round(seek_sample / n_samples_per_frame): round(seek_sample_end / n_samples_per_frame)]
             )
