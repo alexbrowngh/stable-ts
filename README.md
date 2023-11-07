@@ -26,7 +26,7 @@ pip install -U stable-ts
 
 To install the latest commit:
 ```
-pip install -U git+https://github.com/jianfch/stable-ts.git
+pip install -U git+https://github.com/alexbrowngh/stable-ts.git
 ```
 
 ## Usage
